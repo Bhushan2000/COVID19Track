@@ -1,0 +1,49 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/totalConfirmedCases</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="BottomNavigationView">
+        <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="LabelFontStyle">
+        <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/poppins</item>
+        <item name="android:textSize">14sp</item>
+
+    </style>
+
+    <style name="TotalFontStyle">
+        <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/poppins_bold</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="ProgressBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#F5F1FA</item>
+        <item name="colorPrimaryDark">#FBFBFB</item>
+        <item name="colorAccent">#F1F4F4</item>
+
+    </style>
+</resources>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".ui.country.CovidCountryDetails">
+
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:id="@+id/linearLayoutCountryNames"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:textAlignment="center"
+            style="@style/TotalFontStyle"
+            android:id="@+id/tvTotalCountryName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INDIA"
+            android:layout_gravity="center"
+            android:textColor="#ffffff"/>
+
+
+
+    <LinearLayout
+
+        android:id="@+id/linearLayoutCases"
+        android:layout_below="@+id/linearLayoutCountryNames"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+
+            android:layout_marginRight="32dp"
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                style="@style/LabelFontStyle"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Cases"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tvDetailTotalCases"
+                style="@style/TotalFontStyle"
+                android:textSize="26sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="24545"
+                android:layout_marginTop="-10dp"
+                android:textColor="@color/totalConfirmedCases"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+
+            android:layout_below="@+id/linearLayoutCountryNames"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                style="@style/LabelFontStyle"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today Cases"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tvDetailTodayCases"
+                style="@style/TotalFontStyle"
+                android:textSize="26sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="245"
+                android:layout_marginTop="-10dp"
+                android:textColor="@color/totalConfirmedCases"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutDeaths"
+
+        android:layout_below="@+id/linearLayoutCases"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_marginRight="32dp"
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+        <TextView
+            style="@style/LabelFontStyle"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Deaths"
+            android:textColor="#ffffff"/>
+
+        <TextView
+            android:id="@+id/tvDetailTotalDeaths"
+            style="@style/TotalFontStyle"
+            android:textSize="26sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="24545"
+            android:layout_marginTop="-10dp"
+            android:textColor="@color/totalDeaths"/>
+
+
+    </LinearLayout>
+
+
+
+
+        <LinearLayout
+
+            android:layout_below="@+id/linearLayoutCountryNames"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                style="@style/LabelFontStyle"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today Deaths"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tvDetailTodayDeaths"
+                style="@style/TotalFontStyle"
+                android:textSize="26sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="245"
+                android:layout_marginTop="-10dp"
+                android:textColor="@color/totalDeaths"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutRecovered"
+
+        android:layout_below="@+id/linearLayoutDeaths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_marginRight="16dp"
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                style="@style/LabelFontStyle"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Recovered"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tvDetailTotalRecovered"
+                style="@style/TotalFontStyle"
+                android:textSize="26sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="24545"
+                android:layout_marginTop="-10dp"
+                android:textColor="@color/totalRecovered"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+
+
+        android:layout_below="@+id/linearLayoutRecovered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="8dp"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_marginRight="32dp"
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                style="@style/LabelFontStyle"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Active"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tvDetailTotalActive"
+                style="@style/TotalFontStyle"
+                android:textSize="26sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="4545"
+                android:layout_marginTop="-10dp"
+                android:textColor="@color/totalDeaths"/>
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+
+            android:layout_below="@+id/linearLayoutCountryNames"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                style="@style/LabelFontStyle"
+                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Today Critical"
+                android:textColor="#ffffff"/>
+
+            <TextView
+                android:id="@+id/tvDetailTotalCritical"
+                style="@style/TotalFontStyle"
+                android:textSize="26sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="25"
+                android:layout_marginTop="-10dp"
+                android:textColor="@color/totalDeaths"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
