@@ -24,13 +24,18 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.covid_19track.MainActivity;
 import com.example.covid_19track.R;
+import com.example.covid_19track.databinding.FragmentCountryBinding;
+import com.example.covid_19track.databinding.FragmentHomeBinding;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,24 +51,25 @@ import java.util.List;
 public class CountryFragment extends Fragment {
     CovidCountryAdapter covidCountryAdapter;
 
-    RecyclerView rvCovidCountry;
-    ProgressBar progressBar;
+
     List<CovidCountry> covidCountries;
+
+    FragmentCountryBinding binding;
+
+
     private static final String TAG = CountryFragment.class.getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_country, container, false);
 
-        // call view
-        rvCovidCountry = root.findViewById(R.id.rvCovidCountry);
-        progressBar = root.findViewById(R.id.progress_circular_country);
-        rvCovidCountry.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding = FragmentCountryBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(rvCovidCountry.getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.linedivder));
-        rvCovidCountry.addItemDecoration(dividerItemDecoration);
+
+        binding.rvCovidCountry.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+
 
 
         //set has option menu as true because we have menu
@@ -74,14 +80,25 @@ public class CountryFragment extends Fragment {
 
         //call volley method
         getDataFromServerSortTotalCases();
+
+        binding.swipeToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                covidCountries.clear();
+                getDataFromServerSortTotalCases();
+                binding.swipeToRefresh.setRefreshing(false);
+
+            }
+        });
+
         return root;
     }
 
     private void showRecyclerView() {
         covidCountryAdapter = new CovidCountryAdapter(covidCountries, getActivity());
-        rvCovidCountry.setAdapter(covidCountryAdapter);
+        binding.rvCovidCountry.setAdapter(covidCountryAdapter);
 
-        ItemClickSupport.addTo(rvCovidCountry).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+        ItemClickSupport.addTo(binding.rvCovidCountry).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
             @Override
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 showSelectedCovidCountry(covidCountries.get(position));
@@ -103,9 +120,9 @@ public class CountryFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressBar.setVisibility(View.GONE);
                 if (response != null) {
                     Log.e(TAG, "onResponse: " + response);
+                    binding.progressCircularCountry.setVisibility(View.GONE);
 
                     try {
                         JSONArray jsonArray = new JSONArray(response);
@@ -123,26 +140,32 @@ public class CountryFragment extends Fragment {
                                     , data.getString("active")
                                     , data.getString("critical")
                                     , countryInfo.getString("flag")
+                                    , data.getString("continent")
+                                    , data.getInt("tests")
+                                    , data.getInt("population")
+                                    , data.getInt("todayRecovered")
 
 
                             ));
                         }
 
-//                        sort descending9
+//                        sort descending
                         Collections.sort(covidCountries, new Comparator<CovidCountry>() {
                             @Override
                             public int compare(CovidCountry o1, CovidCountry o2) {
-                               if(o1.getmCases()  > o2.getmCases()){
-                                   return -1 ;
-                               }else{
-                                   return 1;
-                               }
+                                if (o1.getmCases() > o2.getmCases()) {
+                                    return -1;
+                                } else {
+                                    return 1;
+                                }
                             }
                         });
 
                         // actionBar Title
-                        getActivity().setTitle(jsonArray.length() + " countries");
+
                         showRecyclerView();
+                        getActivity().setTitle(jsonArray.length() + " Countries");
+
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -154,7 +177,7 @@ public class CountryFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
+                binding.progressCircularCountry.setVisibility(View.GONE);
                 Log.e(TAG, "onErrorResponse: " + error);
 
 
@@ -170,7 +193,7 @@ public class CountryFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressBar.setVisibility(View.GONE);
+                binding.progressCircularCountry.setVisibility(View.GONE);
                 if (response != null) {
                     Log.e(TAG, "onResponse: " + response);
 
@@ -190,7 +213,10 @@ public class CountryFragment extends Fragment {
                                     , data.getString("active")
                                     , data.getString("critical")
                                     , countryInfo.getString("flag")
-
+                                    , data.getString("continent")
+                                    , data.getInt("tests")
+                                    , data.getInt("population")
+                                    , data.getInt("todayRecovered")
 
                             ));
                         }
@@ -211,7 +237,7 @@ public class CountryFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
+                binding.progressCircularCountry.setVisibility(View.GONE);
                 Log.e(TAG, "onErrorResponse: " + error);
 
 
@@ -250,23 +276,32 @@ public class CountryFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case R.id.action_sort_alpha:
-                Toast.makeText(getActivity(),"Sort Alphabetically",Toast.LENGTH_LONG).show();
+                 Snackbar.make(binding.progressCircularCountry,"Sort Alphabetically",Snackbar.LENGTH_SHORT).show();
+
                 covidCountries.clear();
-                progressBar.setVisibility(View.VISIBLE);
+                binding.progressCircularCountry.setVisibility(View.VISIBLE);
                 getDataFromServerSortAlphabetically();
-                return  true;
+                return true;
 
             case R.id.action_sort_cases:
-                Toast.makeText(getActivity(),"Sort by Total cases",Toast.LENGTH_LONG).show();
+                 Snackbar.make(binding.progressCircularCountry,"Sort by Total cases",Snackbar.LENGTH_SHORT).show();
+
                 covidCountries.clear();
-                progressBar.setVisibility(View.VISIBLE);
+                binding.progressCircularCountry.setVisibility(View.VISIBLE);
                 getDataFromServerSortTotalCases();
-                return  true;
+                return true;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+
     }
 }

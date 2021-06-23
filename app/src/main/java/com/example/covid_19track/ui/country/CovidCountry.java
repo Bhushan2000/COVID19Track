@@ -7,10 +7,29 @@ import com.android.volley.toolbox.StringRequest;
 
 public class CovidCountry implements Parcelable {
 
-    String mCovidCountry, mTodayCases, mDeaths, mTodayDeaths, mRecovered, mActive, mCritical, mFlag;
+    String mCovidCountry;
     int  mCases;
+    String mTodayCases, mDeaths, mTodayDeaths, mRecovered, mActive, mCritical, mFlag;
+    String continent;
+    int tests,population;
+    int todayRecovered;
 
-    public CovidCountry(String mCovidCountry, int mCases, String mTodayCases, String mDeaths, String mTodayDeaths, String mRecovered, String mActive, String mCritical, String mFlag) {
+
+
+//    public CovidCountry(String mCovidCountry, int mCases, String mTodayCases, String mDeaths, String mTodayDeaths, String mRecovered, String mActive, String mCritical, String mFlag) {
+//        this.mCovidCountry = mCovidCountry;
+//        this.mCases = mCases;
+//        this.mTodayCases = mTodayCases;
+//        this.mDeaths = mDeaths;
+//        this.mTodayDeaths = mTodayDeaths;
+//        this.mRecovered = mRecovered;
+//        this.mActive = mActive;
+//        this.mCritical = mCritical;
+//        this.mFlag = mFlag;
+//    }
+
+
+    public CovidCountry(String mCovidCountry, int mCases, String mTodayCases, String mDeaths, String mTodayDeaths, String mRecovered, String mActive, String mCritical, String mFlag, String continent, int tests, int population, int todayRecovered) {
         this.mCovidCountry = mCovidCountry;
         this.mCases = mCases;
         this.mTodayCases = mTodayCases;
@@ -20,6 +39,10 @@ public class CovidCountry implements Parcelable {
         this.mActive = mActive;
         this.mCritical = mCritical;
         this.mFlag = mFlag;
+        this.continent = continent;
+        this.tests = tests;
+        this.population = population;
+        this.todayRecovered = todayRecovered;
     }
 
     protected CovidCountry(Parcel in) {
@@ -32,6 +55,10 @@ public class CovidCountry implements Parcelable {
         mActive = in.readString();
         mCritical = in.readString();
         mFlag = in.readString();
+        continent = in.readString();
+        tests = in.readInt();
+        population = in.readInt();
+        todayRecovered = in.readInt();
     }
 
     @Override
@@ -45,6 +72,12 @@ public class CovidCountry implements Parcelable {
         dest.writeString(mActive);
         dest.writeString(mCritical);
         dest.writeString(mFlag);
+        dest.writeString(continent);
+        dest.writeInt(tests);
+        dest.writeInt(population);
+        dest.writeInt(todayRecovered);
+
+
     }
 
     @Override
@@ -98,5 +131,21 @@ public class CovidCountry implements Parcelable {
 
     public String getmFlag() {
         return mFlag;
+    }
+
+    public String getContinent() {
+        return continent;
+    }
+
+    public int getTests() {
+        return tests;
+    }
+
+    public int getPopulation() {
+        return population;
+    }
+
+    public int getTodayRecovered() {
+        return todayRecovered;
     }
 }

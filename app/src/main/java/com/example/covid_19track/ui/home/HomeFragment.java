@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.NetworkError;
@@ -18,7 +19,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.covid_19track.FetchDataInBackground;
 import com.example.covid_19track.R;
+import com.example.covid_19track.databinding.FragmentHomeBinding;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,35 +34,28 @@ import java.util.Date;
 
 public class HomeFragment extends Fragment {
 
-   private TextView tvTotalConfirmed,tvTotalDeaths,tvTotalRecovered;
-   private ProgressBar progressBar;
+
     private static final String TAG = "HomeFragment";
-    private TextView tvLastUpdated;
 
-
+    FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
-        // call view
-        tvTotalConfirmed = root.findViewById(R.id.tvTotalConfirmed);
-        tvTotalDeaths = root.findViewById(R.id.tvTotalDeaths);
-        tvTotalRecovered = root.findViewById(R.id.tvTotalRecovered);
-        progressBar = root.findViewById(R.id.progress_circular_home);
-        tvLastUpdated = root.findViewById(R.id.tvLastUpdated);
 
         // actionBar Title
         getActivity().setTitle("Overview");
 
 
-
         // call volley
         getData();
-        return root;
+        return view;
     }
-    private String getData(long milliSecond){
+
+    private String getData(long milliSecond) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE,dd MMM yyyy hh:mm:ss aaa");
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSecond);
@@ -72,19 +69,21 @@ public class HomeFragment extends Fragment {
         String url = "https://corona.lmao.ninja/v2/all";
 
 
+        
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressBar.setVisibility(View.GONE);
+                binding.progressCircularHome.setVisibility(View.GONE);
 
                 try {
                     JSONObject jsonObject = new JSONObject(response);
 
-                    tvTotalConfirmed.setText(jsonObject.getString("cases"));
-                    tvTotalDeaths.setText(jsonObject.getString("deaths"));
-                    tvTotalRecovered.setText(jsonObject.getString("recovered"));
-                    tvLastUpdated.setText( getData(jsonObject.getLong("updated")));
+                    binding.tvTotalConfirmed.setText(jsonObject.getString("cases"));
+                    binding.tvTotalDeaths.setText(jsonObject.getString("deaths"));
+                    binding.tvTotalRecovered.setText(jsonObject.getString("recovered"));
+                    binding.tvLastUpdated.setText(getData(jsonObject.getLong("updated")));
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -94,10 +93,10 @@ public class HomeFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressBar.setVisibility(View.GONE);
+                binding.progressCircularHome.setVisibility(View.GONE);
 
 
-                Log.d("onErrorResponse: ",error.toString());
+                Log.d("onErrorResponse: ", error.toString());
 
 
             }
@@ -105,6 +104,14 @@ public class HomeFragment extends Fragment {
 
         queue.add(stringRequest);
 
+
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
 
     }
 }

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+
+    app:cardCornerRadius="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--text view for displaying center name-->
+        <ImageView
+            android:id="@+id/one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:src="@drawable/ic_outline_local_hospital_24" />
+
+        <TextView
+
+            android:id="@+id/idTVCenterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/one"
+            android:layout_margin="4dp"
+
+
+
+
+
+
+            android:text="Center Name"
+            android:textColor="@color/black" />
+
+        <!--text view for displaying center address-->
+        <ImageView
+            android:id="@+id/two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_below="@id/idTVCenterName"
+
+            android:src="@drawable/ic_outline_location_on_24" />
+
+        <TextView
+            android:id="@+id/idTVCenterAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idTVCenterName"
+
+            android:layout_toRightOf="@+id/two"
+            android:drawablePadding="4dp"
+            android:layout_margin="4dp"
+
+
+
+
+            android:text="Center Address"
+            android:textColor="@color/black" />
+
+
+        <!--text view for displaying center timings-->
+        <ImageView
+            android:id="@+id/three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_below="@id/idTVCenterAddress"
+
+            android:src="@drawable/ic_outline_watch_later_24" />
+
+        <TextView
+            android:id="@+id/idTVCenterTimings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idTVCenterAddress"
+
+            android:layout_toRightOf="@+id/three"
+
+            android:drawablePadding="4dp"
+            android:layout_margin="4dp"
+
+
+            android:text="Timings"
+
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:layout_marginTop="4dp"
+
+            android:id="@+id/idLL1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idTVCenterTimings"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!--text view for displaying vaccine name-->
+
+            <!--text view for displaying center fees type-->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="4dp"
+                android:layout_alignLeft="@id/idTVVaccineName"
+
+
+                android:src="@drawable/vaccine"
+                app:tint="#717171" />
+
+
+            <TextView
+                android:id="@+id/idTVVaccineName"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:layout_margin="4dp"
+
+
+
+                android:text="Vaccine Name"
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:id="@+id/idTVFeeType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                 android:layout_weight="1"
+                android:layout_margin="4dp"
+
+
+                android:text="Fee Type"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/idLL2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/idLL1"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <!--text view for displaying age limit-->
+            <TextView
+                android:id="@+id/idTVAgeLimit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableStart="@drawable/ic_outline_person_outline_24"
+
+                android:layout_weight="1"
+
+                android:layout_margin="4dp"
+
+
+
+                android:text="Age Limit"
+
+                android:drawablePadding="8dp"
+
+                android:textColor="@color/black"
+                android:drawableLeft="@drawable/ic_outline_person_outline_24" />
+
+            <!--text view for displaying center availability-->
+            <TextView
+                android:id="@+id/idTVAvaliablity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
+                android:layout_weight="1"
+                android:layout_margin="4dp"
+
+
+                android:text="Avaliablity"
+                android:textAlignment="center"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

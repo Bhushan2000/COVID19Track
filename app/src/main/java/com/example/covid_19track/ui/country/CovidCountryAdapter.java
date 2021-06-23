@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -27,6 +29,8 @@ public class CovidCountryAdapter extends RecyclerView.Adapter<CovidCountryAdapte
     private List<CovidCountry>covidCountriesFull;
 
     private Context context;
+    int lastPosition = -1;
+
 
     public CovidCountryAdapter(List<CovidCountry> covidCountries, Context context) {
         this.covidCountries = covidCountries;
@@ -47,17 +51,27 @@ public class CovidCountryAdapter extends RecyclerView.Adapter<CovidCountryAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        CovidCountry covidCountry = covidCountries.get(position);
-        holder.tvtotalCases.setText(Integer.toString(covidCountry.getmCases()));
-        holder.tvCountryName.setText(covidCountry.getmCovidCountry());
 
-        Glide
-                .with(context)
-                .load(covidCountry.getmFlag())
-                .apply(new RequestOptions())
-                .override(240,160)
-                .into(holder.imgCountryFlag);
 
+
+            CovidCountry covidCountry = covidCountries.get(position);
+            holder.tvtotalCases.setText(Integer.toString(covidCountry.getmCases()));
+            holder.tvCountryName.setText(covidCountry.getmCovidCountry());
+
+            Glide
+                    .with(context)
+                    .load(covidCountry.getmFlag())
+                    .apply(new RequestOptions())
+                    .override(240,160)
+                    .into(holder.imgCountryFlag);
+
+
+        if (lastPosition < position) {
+            Animation animation = AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.item_animation_fall_down);
+            holder.itemView.setAnimation(animation);
+            lastPosition = position;
+
+        }
     }
 
     @Override

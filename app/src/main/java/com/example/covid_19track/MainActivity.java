@@ -3,51 +3,56 @@ package com.example.covid_19track;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
-
-import com.example.covid_19track.ui.country.CountryFragment;
-import com.example.covid_19track.ui.home.HomeFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.covid_19track.databinding.ActivityMainBinding;
+import com.example.covid_19track.ui.country.CountryFragment;
+import com.example.covid_19track.ui.home.HomeFragment;
+import com.example.covid_19track.ui.more.MoreFragment;
+import com.example.covid_19track.ui.vaccine.VaccineFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-
-
-public class MainActivity    extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity  extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     Fragment fragment;
+
+    // ViewBinding
+      ActivityMainBinding mainBinding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        final BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
 
-//        navView.setItemIconTintList(null);
+        // ViewBinding
+        mainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = mainBinding.getRoot();
+        setContentView(view);
+
+
+
+
+
+
 
 
 
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
-        NavigationUI.setupWithNavController(navView, navController);
+        NavigationUI.setupWithNavController(mainBinding.navView, navController);
 
         //loading the default fragment
         loadFragment(new HomeFragment());
-        navView.setOnNavigationItemSelectedListener(this);
+        mainBinding.navView.setOnNavigationItemSelectedListener(this);
+        mainBinding.navView.setItemIconTintList(null);
 
 
 
@@ -64,9 +69,16 @@ public class MainActivity    extends AppCompatActivity implements BottomNavigati
                 fragment = new HomeFragment();
                 break;
 
-            case R.id.navigation_country:
+            case R.id.navigation_country1:
                 fragment = new CountryFragment();
                 break;
+            case R.id.navigation_vaccine:
+                fragment = new VaccineFragment();
+                break;
+            case R.id.moreFragment:
+                fragment = new MoreFragment();
+                break;
+
 
 
 
